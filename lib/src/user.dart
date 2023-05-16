@@ -22,7 +22,16 @@ class UserModel extends GenericModel {
 
   @override
   Map<String, Tuple2<Getter<dynamic>, Setter<dynamic>>> getGetterSetterMap() =>
-      {};
+      {
+        'username':
+            Tuple2(() => username, (value) => username = value as String?),
+        'email': Tuple2(() => email, (value) => email = value as String?),
+        'roles': GenericModel.model(
+          () => roles,
+          (value) => roles = value ?? JWTRole(),
+          JWTRole.new,
+        ),
+      };
 
   @override
   String get type => 'User';
@@ -43,9 +52,26 @@ class UserAuthentication extends GenericModel {
   /// has instructions about how to check the password.
   late String method;
 
+  /// The id of the [UserModel] this authentication is for.
+  String? get userId => id?.replaceFirst(prefixTypeForId(''), '');
+  set userId(String? newId) => idSuffix = newId;
+
   @override
   Map<String, Tuple2<Getter<dynamic>, Setter<dynamic>>> getGetterSetterMap() =>
-      {};
+      {
+        'password': GenericModel.primitive(
+          () => password,
+          (value) => password = '$value',
+        ),
+        'salt': GenericModel.primitive(
+          () => salt,
+          (value) => salt = '$value',
+        ),
+        'method': GenericModel.primitive(
+          () => method,
+          (value) => method = '$value',
+        )
+      };
 
   @override
   String get type => 'UserAuthentication';

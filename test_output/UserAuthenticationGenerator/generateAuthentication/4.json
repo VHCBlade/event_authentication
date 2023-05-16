@@ -1,0 +1,7 @@
+[
+  "{\"type\":\"UserAuthentication\",\"password\":\"49a665c38e6e052f0eb888a83f19afdae406bf5831707666fb29752a3b66ad4b\",\"salt\":\"kKHM6RCWSCJv5NmRuxuGzrJ7u8KOKKCw36qv2OFntvPJncWB398oN3uNGywCooj5\",\"method\":\"Ue3ZCIwnzsv21GXbblaOEA==\",\"id\":null}",
+  "{\"type\":\"UserAuthentication\",\"password\":\"cd8fb5be8189cfd9e3ea24fc5919a94625048da6ddcd7e96385dd449d905fcf6\",\"salt\":\"OGQ4vKsz9YVjtL3AokaoDMbrxGM8SCcgQY2fpsmfZzVGDUQNVF5naUPFqCXu6bEc\",\"method\":\"XubIGYwn39r922XbblaOEA==\",\"id\":null}",
+  "{\"type\":\"UserAuthentication\",\"password\":\"7420284ca9585ed25e3e8e9fe7315088d409b1f61f857ff69cc2d10c9a3d47cc\",\"salt\":\"MHfspNVjEqc5awcsT3pb1KvacdokZcvU32NJtJI1yv7o4xv3l5pp9yipA4kR5W5A\",\"method\":\"U+rIGYwn39rx1mXbblaOEA==\",\"id\":null}",
+  "{\"type\":\"UserAuthentication\",\"password\":\"88b566db22feaa2e7b0d569fb2ca314afbb3070c3f3d8ceb0750e47d483b2dfe\",\"salt\":\"pzys5LwQs7uoEmBGanq5KUaegxa1FE15TAfCXJhMYP7eLEqGyczyIGHb5fFoqacm\",\"method\":\"VerIGo8k3Nrx0GXbblaOEA==\",\"id\":null}",
+  "{\"type\":\"UserAuthentication\",\"password\":\"c8f9d78267cd6f9bafec3b3db722fe4b3b25dccadd818b97c9d2edee168d8a90\",\"salt\":\"dlXdcaW8PG4FKs1IpOccgg0mKn4UoZzJVBJ065RTLzOMvFq1vshOzL433SMgBy3d\",\"method\":\"UObZCIwnzsv91WXbblaOEA==\",\"id\":null}"
+]

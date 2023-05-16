@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:event_authentication/src/authenticator/hash.dart';
-import 'package:event_authentication/src/authenticator/method.dart';
+import 'package:event_authentication/event_authentication.dart';
+import 'package:event_authentication/event_authenticator.dart';
 
 Map<String, List<String> Function()> get methodTestCases => {
       'Standard': () =>
@@ -10,6 +10,17 @@ Map<String, List<String> Function()> get methodTestCases => {
       'Fake': () =>
           ['10PSB10', 'PBS', 'BS120', 'B1', '', 'PSB', 'psb102', 'ABC102'],
       'Zero': () => ['PSB0', 'PBS0', 'BSP000', 'SPB0', 'SBP00', 'BPS0'],
+    };
+
+Map<String, UserModel Function()> get userModelTestCases => {
+      'Empty': () => UserModel()..idSuffix = 'Empty',
+      'Username': () => UserModel()
+        ..idSuffix = 'Username'
+        ..username = 'I am Amazing',
+      'Email': () => UserModel()
+        ..idSuffix = 'Empty'
+        ..username = 'Incredible'
+        ..email = 'ex@example.com',
     };
 
 Map<String, MethodEncryptDecrypt Function()>
@@ -41,6 +52,26 @@ Map<String, MethodEncryptDecrypt Function()>
                 ivBase64: 'QIfplaKKc+cXyDKWiNzNqw==',
                 saltBase64: 'x/kuih9JOYNLW8IaFGhfi30/X9qbMjJHsvLWpkWZM6I=',
                 random: Random(100),
+              ),
+        };
+
+Map<String, UserAuthenticationGenerator Function()>
+    get userAuthenticationGeneratorTestCases => {
+          '1': () => UserAuthenticationGenerator(
+                methodGenerator: methodEncryptDecryptTestCases['1-1']!(),
+                passwordHasher: passwordHasherTestCases['1']!(),
+              ),
+          '2': () => UserAuthenticationGenerator(
+                methodGenerator: methodEncryptDecryptTestCases['1-10']!(),
+                passwordHasher: passwordHasherTestCases['2']!(),
+              ),
+          '3': () => UserAuthenticationGenerator(
+                methodGenerator: methodEncryptDecryptTestCases['20-100']!(),
+                passwordHasher: passwordHasherTestCases['3']!(),
+              ),
+          '4': () => UserAuthenticationGenerator(
+                methodGenerator: methodEncryptDecryptTestCases['20-100']!(),
+                passwordHasher: passwordHasherTestCases['4']!(),
               ),
         };
 

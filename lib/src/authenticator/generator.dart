@@ -40,7 +40,7 @@ class UserAuthenticationGenerator {
       ..password = passwordHasher.hash(
         password: basePassword,
         salt: authentication.salt,
-        method: authentication.method,
+        method: methodGenerator.decryptMethod(authentication.method),
       );
 
     return authentication;
@@ -54,7 +54,7 @@ class UserAuthenticationGenerator {
     final hashedPassword = passwordHasher.hash(
       password: basePassword,
       salt: authentication.salt,
-      method: authentication.method,
+      method: methodGenerator.decryptMethod(authentication.method),
     );
 
     return authentication.password == hashedPassword;
