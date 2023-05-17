@@ -34,7 +34,7 @@ class MethodEncryptDecrypt {
     required this.saltBase64,
     required this.ivBase64,
     Random? random,
-  }) : _random = random ?? Random();
+  }) : _random = random ?? Random.secure();
 
   final Random _random;
 

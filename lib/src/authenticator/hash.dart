@@ -15,7 +15,7 @@ class PasswordHasher {
   /// [random] allows you to change the seed used in the randomness or share
   /// it with other objects.
   PasswordHasher({required this.pepper, Random? random})
-      : _random = random ?? Random();
+      : _random = random ?? Random.secure();
 
   final Random _random;
 

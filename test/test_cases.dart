@@ -75,6 +75,14 @@ Map<String, UserAuthenticationGenerator Function()>
               ),
         };
 
+Map<String, Random Function()> get randomTestCases => {
+      '120': () => Random(120),
+      '1203012': () => Random(1203012),
+      '-120': () => Random(-120),
+      '28': () => Random(28),
+      '90': () => Random(90),
+    };
+
 Map<String, PasswordHasher Function()> get passwordHasherTestCases => {
       '1': () => PasswordHasher(
             pepper: '12345678',
