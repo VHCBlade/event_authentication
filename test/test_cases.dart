@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:event_authentication/event_authentication.dart';
-import 'package:event_authentication/event_authenticator.dart';
+import 'package:event_authentication/event_authenticator_db.dart';
+import 'package:event_db/event_db.dart';
 
 Map<String, List<String> Function()> get methodTestCases => {
       'Standard': () =>
@@ -75,6 +76,15 @@ Map<String, UserAuthenticationGenerator Function()>
               ),
         };
 
+Map<String, JWTRole Function()> get jwtRoleTestCases => {
+      'Empty': () => JWTRole()..roles,
+      'Amazing': () => JWTRole()..roles = ['Amazing'],
+      'Incredible': () => JWTRole()..roles = ['Incredible'],
+      'AmazingAndIncredible': () =>
+          JWTRole()..roles = ['Amazing', 'Incredible'],
+      'Null': () => JWTRole()..roles = ['Null', 'None', '0', 'null'],
+    };
+
 Map<String, Random Function()> get randomTestCases => {
       '120': () => Random(120),
       '1203012': () => Random(1203012),
@@ -101,3 +111,63 @@ Map<String, PasswordHasher Function()> get passwordHasherTestCases => {
             random: Random(402),
           ),
     };
+
+Map<String, DatabaseUserAuthenticator Function()>
+    get databaseUserAuthenticatorTestCases => {
+          '1': () => DatabaseUserAuthenticator(
+                authenticationDatabase: 'cool',
+                secretsRepository: FileSecretsRepository(
+                  secretsFile: 'test.json',
+                  random: Random(120),
+                ),
+                database: FakeDatabaseRepository(
+                  constructors: {UserAuthentication: UserAuthentication.new},
+                ),
+                authenticationGenerator: UserAuthenticationGenerator(
+                  methodGenerator: methodEncryptDecryptTestCases['1-1']!(),
+                  passwordHasher: passwordHasherTestCases['1']!(),
+                ),
+              ),
+          '2': () => DatabaseUserAuthenticator(
+                authenticationDatabase: 'amazing',
+                secretsRepository: FileSecretsRepository(
+                  secretsFile: 'test.json',
+                  random: Random(250),
+                ),
+                database: FakeDatabaseRepository(
+                  constructors: {UserAuthentication: UserAuthentication.new},
+                ),
+                authenticationGenerator: UserAuthenticationGenerator(
+                  methodGenerator: methodEncryptDecryptTestCases['1-10']!(),
+                  passwordHasher: passwordHasherTestCases['2']!(),
+                ),
+              ),
+          '3': () => DatabaseUserAuthenticator(
+                authenticationDatabase: 'apseofjsklei',
+                secretsRepository: FileSecretsRepository(
+                  secretsFile: 'test.json',
+                  random: Random(-12035),
+                ),
+                database: FakeDatabaseRepository(
+                  constructors: {UserAuthentication: UserAuthentication.new},
+                ),
+                authenticationGenerator: UserAuthenticationGenerator(
+                  methodGenerator: methodEncryptDecryptTestCases['20-100']!(),
+                  passwordHasher: passwordHasherTestCases['3']!(),
+                ),
+              ),
+          '4': () => DatabaseUserAuthenticator(
+                authenticationDatabase: 'UserAuthentication',
+                secretsRepository: FileSecretsRepository(
+                  secretsFile: 'test.json',
+                  random: Random(50),
+                ),
+                database: FakeDatabaseRepository(
+                  constructors: {UserAuthentication: UserAuthentication.new},
+                ),
+                authenticationGenerator: UserAuthenticationGenerator(
+                  methodGenerator: methodEncryptDecryptTestCases['20-100']!(),
+                  passwordHasher: passwordHasherTestCases['4']!(),
+                ),
+              ),
+        };

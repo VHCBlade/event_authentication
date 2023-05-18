@@ -12,6 +12,14 @@ class JWTRole extends GenericModel {
   /// this [JWTRole].
   List<String> roles = [];
 
+  /// Checks to see if [role] is contained in the [roles] of this
+  /// [JWTRole]
+  bool containsRole(String role) => roles.contains(role);
+
+  /// Checks to see if any of the [roles] are contained in this [JWTRole]
+  bool containsAnyRoles(List<String> roles) =>
+      roles.any((element) => this.roles.contains(element));
+
   @override
   Map<String, Tuple2<Getter<dynamic>, Setter<dynamic>>> getGetterSetterMap() =>
       {
