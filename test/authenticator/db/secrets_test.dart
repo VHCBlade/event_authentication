@@ -1,3 +1,5 @@
+// ignore_for_file: require_trailing_commas
+
 import 'dart:math';
 
 import 'package:event_authentication/src/authenticator/db/secrets.dart';
@@ -21,8 +23,8 @@ void generatorGetterTest() {
     testFunction: (value, tester) async {
       final repository =
           FileSecretsRepository(secretsFile: 'test.json', random: value);
-      // ignore: unused_local_variable
       try {
+        // ignore: unused_local_variable
         for (final i in List.generate(20, (index) => index)) {
           final generator = await repository.generator;
           tester.addTestValue(

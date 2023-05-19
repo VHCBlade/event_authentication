@@ -1,5 +1,5 @@
 name: event_authentication
-description: A starting point for Dart libraries or applications.
+description: Used for User and JWT management using event_db. Also has secure password storage and management.
 version: 0.1.0
 repository: https://github.com/VHCBlade/event_authentication
 

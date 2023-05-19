@@ -23,8 +23,9 @@ void isExpiredTest() {
   expect(jwtYesterday.isExpired, true);
   expect((jwtYesterday..expiry = const Duration(seconds: 20)).isExpired, true);
   expect(
-      (jwtYesterday..expiry = const Duration(days: 1, seconds: 20)).isExpired,
-      false);
+    (jwtYesterday..expiry = const Duration(days: 1, seconds: 20)).isExpired,
+    false,
+  );
 }
 
 void jwtRoleContainsTest() {
