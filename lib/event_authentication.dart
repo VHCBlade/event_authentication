@@ -3,4 +3,5 @@
 library event_authentication;
 
 export 'src/jwt.dart';
+export 'src/login.dart';
 export 'src/user.dart';
