@@ -5,11 +5,26 @@ import 'package:test/test.dart';
 import 'test_cases.dart';
 
 void main() {
-  // group('BaseJWT', () {});
+  group('BaseJWT', () {
+    test('isExpired', isExpiredTest);
+  });
   group('JWTRole', () {
     group('containsRole', jwtRoleContainsTest);
     group('containsAnyRole', jwtRoleContainsAnyTest);
   });
+}
+
+void isExpiredTest() {
+  final jwtNow = BaseJWT();
+  final jwtYesterday = BaseJWT()
+    ..dateIssued = DateTime.now().subtract(const Duration(days: 1));
+  expect(jwtNow.isExpired, true);
+  expect((jwtNow..expiry = const Duration(seconds: 20)).isExpired, false);
+  expect(jwtYesterday.isExpired, true);
+  expect((jwtYesterday..expiry = const Duration(seconds: 20)).isExpired, true);
+  expect(
+      (jwtYesterday..expiry = const Duration(days: 1, seconds: 20)).isExpired,
+      false);
 }
 
 void jwtRoleContainsTest() {
