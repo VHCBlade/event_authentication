@@ -1,3 +1,4 @@
+import 'package:event_authentication/event_authentication.dart';
 import 'package:event_db/event_db.dart';
 import 'package:tuple/tuple.dart';
 
@@ -36,6 +37,23 @@ class JWTRole extends GenericModel {
 /// This is the Base JWT Model for your authentication. You can extend this to
 /// add more data if necessary, however you can use this as is.
 class BaseJWT extends GenericModel {
+  /// Default Constructor
+  BaseJWT();
+
+  /// Creates a base jwt from a [userModel].
+  ///
+  /// [duration] will set the [expiry] value to the given value automatically.
+  /// You can still edit this afterwards.
+  factory BaseJWT.fromUserModel(
+    UserModel userModel, {
+    Duration duration = const Duration(hours: 2),
+  }) =>
+      BaseJWT()
+        ..id = userModel.id
+        ..dateIssued = DateTime.now()
+        ..expiry = duration
+        ..jwtRole = (JWTRole()..copy(userModel.roles));
+
   /// When this [BaseJWT] was issued. This is combined with expiry to determine
   /// if a JWT has expired.
   DateTime dateIssued = DateTime.now();

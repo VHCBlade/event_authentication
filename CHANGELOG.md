@@ -1,5 +1,6 @@
 ## 0.1.1
 
+- Added JWTSigner
 - Added noExpiry field that defaults to false to EmailLoginRequest
 - Added jwtSecret to AuthenticationSecretsRepository
 

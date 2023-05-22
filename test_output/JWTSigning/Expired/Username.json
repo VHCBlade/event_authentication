@@ -1,0 +1,4 @@
+[
+  "{\"type\":\"BaseJWT\",\"dateIssued\":1577808000000000,\"role\":{\"type\":\"JWTRole\",\"roles\":[],\"id\":null},\"expiry\":31536000000,\"id\":\"User::Username\"}",
+  "\"Expired!\""
+]
