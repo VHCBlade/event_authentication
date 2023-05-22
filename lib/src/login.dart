@@ -8,11 +8,20 @@ class EmailLoginRequest extends GenericModel {
 
   /// The password of the user to be logged in
   late String password;
+
+  /// For a login that wishes to set an expiration indefinitely
+  /// such as for mobile.
+  late bool noExpiry;
+
   @override
   Map<String, Tuple2<Getter<dynamic>, Setter<dynamic>>> getGetterSetterMap() =>
       {
         'email': Tuple2(() => email, (val) => email = val as String),
         'password': Tuple2(() => password, (val) => password = val as String),
+        'lateExpiry': Tuple2(
+          () => noExpiry,
+          (val) => noExpiry = val as bool? ?? false,
+        ),
       };
 
   @override

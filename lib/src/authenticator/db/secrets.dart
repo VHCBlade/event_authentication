@@ -55,6 +55,9 @@ abstract class AuthenticationSecretsRepository extends Repository {
   /// Retrieves the secrets from a potentially secure place.
   FutureOr<AuthenticationSecretsModel> get secrets;
 
+  /// Retrieves the jwt secret from a potentially secure place.
+  FutureOr<String> get jwtSecret;
+
   /// Clears any secrets that have been set.
   ///
   /// YOU SHOULD BE VERY CAREFUL WHEN CALLING THIS
@@ -100,6 +103,8 @@ class FileSecretsRepository extends AuthenticationSecretsRepository {
   /// the path to where the secrets file can be found and stored.
   final String secretsFile;
 
+  String get _jwtSecretsFile => '$secretsFile.jwt';
+
   @override
   final Random? random;
 
@@ -114,8 +119,29 @@ class FileSecretsRepository extends AuthenticationSecretsRepository {
     try {
       File(secretsFile).deleteSync();
     } on FileSystemException {
+      // just go on
+    }
+
+    try {
+      File(_jwtSecretsFile).deleteSync();
+    } on FileSystemException {
       return;
     }
+  }
+
+  @override
+  Future<String> get jwtSecret async {
+    final file = File(_jwtSecretsFile);
+    if (file.existsSync()) {
+      return file.readAsStringSync();
+    }
+
+    file.createSync(recursive: true);
+    final myRandom = random ?? Random.secure();
+    final hasher = PasswordHasher(pepper: '', random: myRandom);
+    final secret = hasher.generateSalt(length: myRandom.nextInt(32) + 64);
+    file.writeAsStringSync(secret);
+    return secret;
   }
 
   @override

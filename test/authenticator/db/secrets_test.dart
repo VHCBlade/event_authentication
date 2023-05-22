@@ -11,6 +11,7 @@ import '../../test_cases.dart';
 void main() {
   group('FileSecretsRepository', () {
     group('secrets Getter', secretsGetterTest);
+    group('jwtSecret Getter', jwtSecretGetterTest);
     group('generator Getter', generatorGetterTest);
   });
 }
@@ -30,6 +31,29 @@ void generatorGetterTest() {
           tester.addTestValue(
               generator.generateAuthentication('Amazing').toMap());
           repository.clearSecrets();
+        }
+      } finally {
+        repository.clearSecrets();
+      }
+    },
+    testMap: randomTestCases,
+  ).runTests();
+}
+
+void jwtSecretGetterTest() {
+  SerializableListTester<Random>(
+    testGroupName: 'FileSecretsRepository',
+    mainTestName: 'jwtSecret Getter',
+    mode: ListTesterMode.auto,
+    testFunction: (value, tester) async {
+      final repository =
+          FileSecretsRepository(secretsFile: 'test.json', random: value);
+      try {
+        for (final i in List.generate(20, (index) => index)) {
+          if (i.isOdd) {
+            repository.clearSecrets();
+          }
+          tester.addTestValue(await repository.jwtSecret);
         }
       } finally {
         repository.clearSecrets();
