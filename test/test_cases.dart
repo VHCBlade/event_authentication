@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:event_authentication/event_authentication.dart';
 import 'package:event_authentication/event_authenticator_db.dart';
 import 'package:event_db/event_db.dart';
 
