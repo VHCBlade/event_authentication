@@ -13,6 +13,7 @@ void main() {
     group('Wrong Secret', wrongSecretTest);
     group('Wrong Format', wrongFormatTest);
     group('Wrong Inner Format', wrongInnerFormatTest);
+    group('fromToken', fromTokenTest);
   });
 }
 
@@ -146,6 +147,27 @@ void normalSigningTest() {
 
       final token = await signer.createToken(jwt);
       final decodedJwt = await signer.validateAndDecodeToken(token);
+      tester.addTestValue(decodedJwt.toMap());
+      expect(jwt.hasSameFields(model: decodedJwt), true);
+    },
+    testMap: userModelTestCases,
+  ).runTests();
+}
+
+void fromTokenTest() {
+  SerializableListTester<UserModel>(
+    testGroupName: 'JWTSigning',
+    mainTestName: 'fromToken',
+    mode: ListTesterMode.auto,
+    testFunction: (value, tester) async {
+      final signer = JWTSigner(() => value.idSuffix!, issuer: 'example.com');
+      final jwt = BaseJWT.fromUserModel(value)
+        ..dateIssued = DateTime(2020)
+        ..expiry = const Duration(days: 365 * 100);
+      tester.addTestValue(jwt.toMap());
+
+      final token = await signer.createToken(jwt);
+      final decodedJwt = BaseJWT.fromToken(token);
       tester.addTestValue(decodedJwt.toMap());
       expect(jwt.hasSameFields(model: decodedJwt), true);
     },

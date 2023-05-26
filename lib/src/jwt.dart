@@ -1,3 +1,4 @@
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:event_authentication/event_authentication.dart';
 import 'package:event_db/event_db.dart';
 import 'package:tuple/tuple.dart';
@@ -53,6 +54,27 @@ class BaseJWT extends GenericModel {
         ..dateIssued = DateTime.now()
         ..expiry = duration
         ..jwtRole = (JWTRole()..copy(userModel.roles));
+
+  /// Creates a base jwt from the given [token].
+  ///
+  /// Does not check if the underlying token is valid or not.
+  factory BaseJWT.fromToken(String token) {
+    late final JWT jwt;
+    try {
+      jwt = JWT.decode(token);
+    } on FormatException {
+      throw JWTInvalidException('Token format is incorrect!');
+    }
+
+    if (jwt.payload is! Map<String, dynamic>) {
+      throw JWTInvalidException(
+        'JWT does not contain a proper BaseJWT as its payload!',
+      );
+    }
+
+    final baseJWT = BaseJWT()..loadFromMap(jwt.payload as Map<String, dynamic>);
+    return baseJWT;
+  }
 
   /// When this [BaseJWT] was issued. This is combined with expiry to determine
   /// if a JWT has expired.

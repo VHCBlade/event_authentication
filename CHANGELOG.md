@@ -1,3 +1,8 @@
+## 0.1.1+1
+
+- Added event_authentication to exported libraries of event_authenticator
+- Added BaseJWT.fromToken method
+
 ## 0.1.1
 
 - Added JWTSigner
