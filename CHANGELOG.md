@@ -1,3 +1,7 @@
+## 0.1.1+2
+
+- Changed noExpiry to have a default value in EmailLoginRequest
+
 ## 0.1.1+1
 
 - Added event_authentication to exported libraries of event_authenticator

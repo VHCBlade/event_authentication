@@ -11,7 +11,7 @@ class EmailLoginRequest extends GenericModel {
 
   /// For a login that wishes to set an expiration indefinitely
   /// such as for mobile.
-  late bool noExpiry;
+  bool noExpiry = false;
 
   @override
   Map<String, Tuple2<Getter<dynamic>, Setter<dynamic>>> getGetterSetterMap() =>
