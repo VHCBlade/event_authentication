@@ -1,6 +1,6 @@
 name: event_authentication
 description: Used for User and JWT management using event_db. Also has secure password storage and management.
-version: 0.1.2
+version: 0.1.2+1
 repository: https://github.com/VHCBlade/event_authentication
 
 environment:
@@ -9,7 +9,7 @@ environment:
 dependencies:
 
   crypto: ^3.0.3
-  dart_jsonwebtoken: ^2.7.1
+  dart_jsonwebtoken: ^2.8.0
   encrypt: ^5.0.1
 
   event_bloc: ^4.2.0

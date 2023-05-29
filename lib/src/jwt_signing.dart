@@ -42,15 +42,12 @@ class JWTSigner {
     late final JWT jwt;
     try {
       jwt = JWT.verify(token, SecretKey(secret));
-
-      // ignore: avoid_catching_errors
-    } on JWTExpiredError {
+    } on JWTExpiredException {
       throw EventJWTExpiredException();
-      // ignore: avoid_catching_errors
-    } on JWTError catch (e) {
+    } on JWTException catch (e) {
       throw EventJWTInvalidException(e.message);
-    } on FormatException {
-      throw EventJWTInvalidException('Token format is incorrect!');
+    } on FormatException catch (e) {
+      throw EventJWTInvalidException(e.message);
     }
 
     if (jwt.payload is! Map<String, dynamic>) {

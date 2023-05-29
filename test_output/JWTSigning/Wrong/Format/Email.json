@@ -1,4 +1,4 @@
 [
   "\"Invalid!\"",
-  "\"Token format is incorrect!\""
+  "\"FormatException: Invalid character (at character 1)\\n{type: User, username: Incredible, email: ex@example\\n^\\n\""
 ]
