@@ -28,7 +28,7 @@ void wrongInnerFormatTest() {
       final token = jwt.sign(SecretKey(value.idSuffix!));
       try {
         await signer.validateAndDecodeToken(token);
-      } on JWTInvalidException catch (e) {
+      } on EventJWTInvalidException catch (e) {
         tester
           ..addTestValue('Invalid!')
           ..addTestValue(e.message);
@@ -47,7 +47,7 @@ void wrongFormatTest() {
       final signer = JWTSigner(() => value.idSuffix!, issuer: 'example.com');
       try {
         await signer.validateAndDecodeToken('${value.toMap()}');
-      } on JWTInvalidException catch (e) {
+      } on EventJWTInvalidException catch (e) {
         tester
           ..addTestValue('Invalid!')
           ..addTestValue(e.message);
@@ -74,7 +74,7 @@ void wrongSecretTest() {
       final token = await signer.createToken(jwt);
       try {
         await signer2.validateAndDecodeToken(token);
-      } on JWTInvalidException catch (e) {
+      } on EventJWTInvalidException catch (e) {
         tester
           ..addTestValue('Invalid!')
           ..addTestValue(e.message);
@@ -100,7 +100,7 @@ void wrongIssuerTest() {
       final token = await signer.createToken(jwt);
       try {
         await signer2.validateAndDecodeToken(token);
-      } on JWTInvalidException catch (e) {
+      } on EventJWTInvalidException catch (e) {
         tester
           ..addTestValue('Invalid!')
           ..addTestValue(e.message);
@@ -125,7 +125,7 @@ void expiredSigningTest() {
       final token = await signer.createToken(jwt);
       try {
         await signer.validateAndDecodeToken(token);
-      } on JWTExpiredException {
+      } on EventJWTExpiredException {
         tester.addTestValue('Expired!');
       }
     },

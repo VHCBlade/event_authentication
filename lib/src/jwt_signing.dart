@@ -4,13 +4,13 @@ import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:event_authentication/event_authentication.dart';
 
 /// An exception thrown when a jwt has already expired.
-class JWTExpiredException implements Exception {}
+class EventJWTExpiredException implements Exception {}
 
 /// An exception thrown when a jwt isn't signed correctly or is otherwise
 /// invalid.
-class JWTInvalidException implements Exception {
+class EventJWTInvalidException implements Exception {
   /// [message] gives extra information about why the exception happened.
-  JWTInvalidException(this.message);
+  EventJWTInvalidException(this.message);
 
   /// gives extra information about why the exception happened.
   final String message;
@@ -45,26 +45,26 @@ class JWTSigner {
 
       // ignore: avoid_catching_errors
     } on JWTExpiredError {
-      throw JWTExpiredException();
+      throw EventJWTExpiredException();
       // ignore: avoid_catching_errors
     } on JWTError catch (e) {
-      throw JWTInvalidException(e.message);
+      throw EventJWTInvalidException(e.message);
     } on FormatException {
-      throw JWTInvalidException('Token format is incorrect!');
+      throw EventJWTInvalidException('Token format is incorrect!');
     }
 
     if (jwt.payload is! Map<String, dynamic>) {
-      throw JWTInvalidException(
+      throw EventJWTInvalidException(
         'JWT does not contain a proper BaseJWT as its payload!',
       );
     }
     if (jwt.issuer != issuer) {
-      throw JWTInvalidException('JWT Issuer does not match!');
+      throw EventJWTInvalidException('JWT Issuer does not match!');
     }
 
     final baseJWT = BaseJWT()..loadFromMap(jwt.payload as Map<String, dynamic>);
     if (baseJWT.isExpired) {
-      throw JWTExpiredException();
+      throw EventJWTExpiredException();
     }
     return baseJWT;
   }

@@ -1,3 +1,7 @@
+## 0.1.2
+
+- Renamed Exceptions to avoid collisions
+
 ## 0.1.1+2
 
 - Changed noExpiry to have a default value in EmailLoginRequest

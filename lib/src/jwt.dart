@@ -63,11 +63,11 @@ class BaseJWT extends GenericModel {
     try {
       jwt = JWT.decode(token);
     } on FormatException {
-      throw JWTInvalidException('Token format is incorrect!');
+      throw EventJWTInvalidException('Token format is incorrect!');
     }
 
     if (jwt.payload is! Map<String, dynamic>) {
-      throw JWTInvalidException(
+      throw EventJWTInvalidException(
         'JWT does not contain a proper BaseJWT as its payload!',
       );
     }
