@@ -1,6 +1,6 @@
 name: event_authentication
 description: Used for User and JWT management using event_db. Also has secure password storage and management.
-version: 0.1.2+1
+version: 0.1.3
 repository: https://github.com/VHCBlade/event_authentication
 
 environment:

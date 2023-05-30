@@ -1,3 +1,7 @@
+## 0.1.3
+
+- Added HeaderExtension
+
 ## 0.1.2+1
 
 - Renamed Exceptions to avoid collisions
