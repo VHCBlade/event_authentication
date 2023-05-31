@@ -1,14 +1,21 @@
 /// Adds header methods for passing into requests or responses
 extension HeaderExtension on Map<String, Object> {
   /// Sets the [token] into the Authrorization header
-  set authorization(String? token) => token == null
-      ? remove('Authorization')
-      : this['Authorization'] = 'Bearer $token';
+  set authorization(String? token) {
+    remove('Authorization');
+    remove('authorization');
+    if (token != null) {
+      this['Authorization'] = 'Bearer $token';
+    }
+  }
+
+  String? _getAuthorization(String key) => this[key] == null
+      ? null
+      : '${this[key]}'.startsWith('Bearer ')
+          ? '${this[key]}'.substring('Bearer '.length)
+          : '${this[key]}';
 
   /// Gets the JWT Token from the Authorization header
-  String? get authorization => this['Authorization'] == null
-      ? null
-      : "${this['Authorization']}".startsWith('Bearer ')
-          ? "${this['Authorization']}".substring('Bearer '.length)
-          : "${this['Authorization']}";
+  String? get authorization =>
+      _getAuthorization('Authorization') ?? _getAuthorization('authorization');
 }

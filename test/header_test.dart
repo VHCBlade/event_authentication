@@ -16,5 +16,16 @@ void main() {
       expect(map.authorization, 'Amazing');
       expect(map, {'Authorization': 'Amazing'});
     });
+    test('Lowercase Authorization', () {
+      final map = <String, Object>{};
+
+      map['authorization'] = 'Amazing';
+      expect(map.authorization, 'Amazing');
+      expect(map, {'authorization': 'Amazing'});
+
+      map.authorization = null;
+      expect(map.authorization, null);
+      expect(map, <String, Object>{});
+    });
   });
 }

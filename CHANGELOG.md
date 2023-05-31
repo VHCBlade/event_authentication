@@ -1,3 +1,8 @@
+## 0.1.3+1
+
+- Fixed Issue where authorization wouldn't work correctly if the header key was all lower case.
+- Added login_test
+
 ## 0.1.3
 
 - Added HeaderExtension
