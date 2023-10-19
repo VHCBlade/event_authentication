@@ -1,3 +1,7 @@
+## 0.1.4
+
+- Added PrivatePublicJWTSigner which implements JWTSigner
+
 ## 0.1.3+1
 
 - Fixed Issue where authorization wouldn't work correctly if the header key was all lower case.
