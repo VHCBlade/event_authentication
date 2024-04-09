@@ -1,1 +1,2 @@
-- Added PrivatePublicJWTSigner which implements JWTSigner
+- Add PrivatePublicJWTSigner which implements JWTSigner
+- Add validateNonStandardToken to JWTSigner use a more permanent solution

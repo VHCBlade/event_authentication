@@ -1,6 +1,11 @@
+## 0.1.5
+
+- Added createNonStandardToken to JWTSigner
+
 ## 0.1.4
 
-- Added PrivatePublicJWTSigner which implements JWTSigner
+- Updated event_db and event_db_tester to also accept the new 0.2.0 version
+- Added TODO.md
 
 ## 0.1.3+1
 

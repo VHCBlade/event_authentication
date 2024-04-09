@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:event_authentication/event_authentication.dart';
+import 'package:event_db/event_db.dart';
 
 /// An exception thrown when a jwt has already expired.
 class EventJWTExpiredException implements Exception {}
@@ -31,6 +32,14 @@ class JWTSigner {
   /// header.
   Future<String> createToken(BaseJWT baseJWT) async {
     final jwt = JWT(baseJWT.toMap(), issuer: issuer);
+    final secret = await _secret();
+    return jwt.sign(SecretKey(secret));
+  }
+
+  /// Creates a token from a [jwtModel] to be placed in the Authorization
+  /// header.d
+  Future<String> createNonStandardToken(BaseModel jwtModel) async {
+    final jwt = JWT(jwtModel.toMap(), issuer: issuer);
     final secret = await _secret();
     return jwt.sign(SecretKey(secret));
   }

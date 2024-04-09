@@ -1,4 +1,4 @@
 [
   "\"Invalid!\"",
-  "\"FormatException: Invalid character (at character 1)\\n{type: User, username: I am Amazing, email: null, roles: {type: JWTRole, ro...\\n^\\n\""
+  "\"FormatException: Invalid character (at character 1)\\n{username: I am Amazing, email: null, roles: {roles: [], id: null, type: JW...\\n^\\n\""
 ]

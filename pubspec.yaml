@@ -1,10 +1,10 @@
 name: event_authentication
 description: Used for User and JWT management using event_db. Also has secure password storage and management.
-version: 0.1.4
+version: 0.1.5
 repository: https://github.com/VHCBlade/event_authentication
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=2.19.6 <4.0.0'
 
 dependencies:
 

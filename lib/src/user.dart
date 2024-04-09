@@ -70,7 +70,7 @@ class UserAuthentication extends GenericModel {
         'method': GenericModel.primitive(
           () => method,
           (value) => method = '$value',
-        )
+        ),
       };
 
   @override

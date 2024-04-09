@@ -1,4 +1,5 @@
 import 'package:event_authentication/event_authentication.dart';
+import 'package:event_db/event_db.dart';
 import 'package:test/test.dart';
 
 void main() {

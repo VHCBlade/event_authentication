@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:event_authentication/event_authentication.dart';
 import 'package:event_authentication/src/authenticator/db/user.dart';
 import 'package:event_bloc_tester/event_bloc_tester.dart';
+import 'package:event_db/event_db.dart';
 
 import '../../../test_cases.dart';
 
